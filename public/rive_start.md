@@ -2,6 +2,7 @@
 title: Riveを始めてみた
 tags:
   - Rive
+  - animation
 private: false
 updated_at: ''
 id: null
