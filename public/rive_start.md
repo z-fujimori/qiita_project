@@ -12,4 +12,4 @@ ignorePublish: false
 # new article body
 メモ
 - 10値くらいの入力があってそれによってなめらかに変化するアニメーション作りたい
-
+- inputではない新しいモダンなやつ
