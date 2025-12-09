@@ -5,8 +5,8 @@ tags:
   - API
   - Web
 private: false
-updated_at: ''
-id: null
+updated_at: '2025-11-28T03:54:53+09:00'
+id: 3400c4d44552fa1aee08
 organization_url_name: null
 slide: false
 ignorePublish: false
