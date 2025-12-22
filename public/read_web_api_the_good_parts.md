@@ -1,11 +1,11 @@
 ---
-title: Web API The Good Parts の読書メモ
+title: Web API The Good Parts を読んでみて
 tags:
   - Book
   - API
   - Web
 private: false
-updated_at: '2025-11-28T03:54:53+09:00'
+updated_at: '2025-12-23T02:22:12+09:00'
 id: 3400c4d44552fa1aee08
 organization_url_name: null
 slide: false

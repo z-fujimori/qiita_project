@@ -1,11 +1,11 @@
 ---
-title: Clean Architecture の読書メモ
+title: Clean Architecture を読んでみて
 tags:
   - Book
   - アーキテクチャ
   - CleanArchitecture
 private: false
-updated_at: '2025-11-28T01:24:00+09:00'
+updated_at: '2025-12-23T02:22:46+09:00'
 id: 6ef510bfb62feca43114
 organization_url_name: null
 slide: false
