@@ -27,8 +27,7 @@ https://rive.app/
 
 アプリやweb上で動くアニメーションを作成できるツール。
 
-Riveのアニメーションはインタラクティブにクリックやホバー、イベントに対して反応してアニメーションを動かしたり、状態を管理することが可能。
-デスクトップアプリとweb版が存在する。（今回はWeb版を使用）
+Riveのアニメーションはインタラクティブにクリックやホバー、イベントに対して反応してアニメーションを動かしたり、状態を管理することが可能。デスクトップアプリとweb版が存在する。（今回はWeb版を使用）
 
 Notion AIのアイコンやDuolingoのアニメーションにも使われている。
 
@@ -37,20 +36,69 @@ Riveにアカウントを作って作業開始。
 ### 丸や四角（シェイプ）を置く
 `Create Artbord`からアートボードを作成。サイズはデフォルトの500*500。
 
-<!-- ![create_shape.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/5764032a-b392-4850-8df6-0cdd98e2f6be.png) -->
+アートボード作成後、上のナビゲーションからペンマーク✒️の横の矢印を選択して任意の形を選択。ドラック＆ドロップでアートボード上に配置する。
 
-<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/5764032a-b392-4850-8df6-0cdd98e2f6be.png" width="300" height="auto">
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/f7fc825e-02f1-4108-ba2c-99a94b7640fe.png" width="650" height="auto">
+
+下記のようにいい感じに配置してオブジェクトを作成する。
+
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/53d13939-e1c3-4edb-ac9c-399c396f6e1b.png" width="650" height="auto">
+
+👇参考値
+
+|形|xy座標(X,Y)|大きさ(W,H)|
+|-|-|-|
+|HitBox（Rectangle）|(250,250)|(500,500)|
+|Sclera（Ellipse）|(250,250)|(360,360)|
+|Iris（Ellipse）|(250,250)|(190,190)|
+|Highlight（Ellipse）|(290,210)|(20,50)|
+
+HitBoxを非表示にする。左のサイドバーから目👁️のマークを押す。
+
+Iris（黒目）とHighlightをグループ化する。サイドバーかアートボードから2つを選択して`右クリック > Wrap in > Group`を選択。
+
+### オブジェクトにマウスを追いかけさせる
+右側のサイドバー上部の`Animate`をクリックするとアニメーションタイムラインが出現。
+
+**①Listenerアイテム追加**
+HitBoxを選択後、ListenersからプラスボタンでListenerアイテムを追加。
+何も選択していないと`Listener 1`というアイテムが出現する。その場合はリッスン対象を変更してください（②の後半部分）。
+
+**②リッスンするマウス動作を選ぶ**
+マウスが要素に入った時・出た時・クリックされた時・などいくつかオプションの種類がありますが、今回はマウスの動作に合わせてアニメーションを動かしたいので`Pointer Enter`を選択。
+ここでイベントをリッスンするオブジェクトがHitBoxになっていなかったら変更してください。
+
+**③黒目がマウスを追いかけるよう設定**
+中央下部のエリアでアクションを設定する。もともとあるsetアクションを削除して`Align Target`アクションを設定する。動作の対象を選ぶために、`Target`を選択した後、IrisGroupを選択する。`Target`が`IrisGroup`になっていれば完了。
+
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/b8f94ef9-e1d3-4465-a3eb-ca0e49fc8de6.png" width="650">
+
+ここまでやったら動きを確認してみましょう！
+再生ボタンを押すとアニメーションがスタートします。
+HitBoxの範囲内に入るとマウスに黒目がついてきたらOKです。
+
+### 動きを白目の中に留める
+> Constraintsで黒目の動きを制限します。RiveのConstraintsとは、オブジェクトの動きをルールで制限して物理的な挙動を作り出してくれます。
+今回はDistance Constraintを使います。Distanceは紐で引っ張られているような挙動になります。
+
+まず動きの中心となるアンカーを設置します。空のグループを中心に設置してください。グループはナビゲーションバーの左から3つ目の`井`から選択してください。
+
+Constraintsを設定します。IrisGroupを選択した後に、右側のサイドバーからConstraintsの`＋ > Distane`を選んでください。
+スライダーアイコンから設定を開き各値を設定。
+Strengthは制限の強さで100％だと設定した距離でピタッと止まる。値を下げていくほど距離外へ逆方向から引っ張られているように飛び出して動く。
+`Target`は先ほど作成したGroupを設定する。設定方法は他と同様に、`Target`を選択した後に選びたいオブジェクトを選ぶ。
+Distanceはアンカーからの距離を設定する。
+Modeでルールを設定する。今回はオブジェクトの中心を囲内に納めたいので`Closer`を選択。範囲内に入れたくなければ`Futher`、円周上を移動させたければ`Exact`を選択する。
+
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/3fb13c14-f416-4aa6-b775-5b7be9bf8b34.png" width="650">
+
+動かしてみるとマウスを目で追うアニメーションが出来ていると思います！
 
 
-### マウスを追いかけさせる
-test script test script test script test script test script 
-test script test script test script test script test script 
-test script test script test script 
-### 状態をつける
-test script test script test script test script test script 
-test script test script test script test script test script 
-test script test script test script 
-## appendix : webアプリに組み込む
+## apendix1 : 状態をつける
+ずっとマウスを追いかけているのは辛そうなので、オンオフをつけたいと思います。
+
+## appendix2 : webアプリに組み込む
 test script test script test script test script test script 
 test script test script test script test script test script 
 test script test script test script 
@@ -58,6 +106,8 @@ test script test script test script
 # 最後に
 OOしてきました。
 Riveの公式記事が動画しか見当たらず、私のような初心者🔰向けの記事も見当たらなかったので、操作方法を中心にまとめました。
+
+GUIはとにかくどこを操作すれば良いのか分からず選択項目が多くあるRiveは全く知らない状態から始めるには大変でした、、、
 
 下記参考にした資料です。その他にもRive Marketplaceにあるアニメーションも参考になるかもしれません。
 
