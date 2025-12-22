@@ -31,6 +31,9 @@ Riveのアニメーションはインタラクティブにクリックやホバ�
 
 Notion AIのアイコンやDuolingoのアニメーションにも使われている。
 
+**❗️注意**
+アニメーションの作成は無料でできますが、エクスポートには有料版へのアップグレードが必要です。最も安いプランは月17ドル、年108ドルです。
+
 # アニメーションを作っていく！
 Riveにアカウントを作って作業開始。
 ### 丸や四角（シェイプ）を置く
@@ -94,24 +97,67 @@ Modeでルールを設定する。今回はオブジェクトの中心を囲内�
 
 動かしてみるとマウスを目で追うアニメーションが出来ていると思います！
 
-
 ## apendix1 : 状態をつける
-ずっとマウスを追いかけているのは辛そうなので、オンオフをつけたいと思います。
+ずっとマウスを追いかけているのは目が辛そうなので、オンオフをつけたいと思います。
+AnimationsにTimelineを追加。既存のTimelineの名前をSleep、新しく追加した方をActiveとする。
+
+### Timelineに静止位置を設定
+Sleepタイムラインを選択、IrisGroupのPosition x,yの横にあるダイヤをクリックしてONにする。タイムラインにIrisGroupが現れて、`00:00`の部分にピンがあればOK。
+青ダイヤ🔷はキーフレームONの状態であり、オブジェクトのプロパティを選択しているタイムラインに対して時間ごとに変化（アニメーション）させることができる。
+
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/3d442214-11c7-4cbc-b86f-f101ee21dda8.png" width="650">
+
+### 状態管理
+InputsでBooleanを追加。Activeタイムラインをドラック＆ドロップ。Scleraオブジェクトを選択してListenerアイテムを追加する。Listenerイベントは`InputChange`で`Boolean 1`と`toggle`を選択、マウスオプションは`Click`。
+
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/cd0ff188-032b-4b2d-a5a3-3c50d2d2079e.png" width="650">
+
+Layer1のタブのActiveからSleep、SleepからActiveへ矢印を引く。四角の近くへマウスを持っていくとガイドが現れるのでドラック＆ドロップで状態遷移の線を弾ける。矢印クリックで遷移の条件を設定できる。Sleep→Activeでは`Boolean1 - true`とし、Active→Sleepでは`Boolean2 - false`とする。
+Durationを設定するとゆっくり状態が変わる。
+画像はActive→Sleep
+
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/e1e94a1e-10a1-4cc1-8b23-7a4fd4fb9022.png" width="650">
+
+これでクリックで状態が変化して、目がマウスを追いかける/正面のみを向くを切り替えられるようになる。
 
 ## appendix2 : webアプリに組み込む
-test script test script test script test script test script 
-test script test script test script test script test script 
-test script test script test script 
+せっかくアニメーションを作ったのでWeb上で表示してみようと思います（有料）。
+画面上部のExportから`.riv`ファイルをエクスポートして保存。
+
+Reactで表示させます。`npm i --save @rive-app/react-canvas`でReactからRive を使うための公式ラッパーを入れる。
+public直下に.rivファイルを置いた場合は下記のようになります。
+
+```typescript
+import { useRive } from '@rive-app/react-canvas';
+
+function RiveComp() {
+  const { RiveComponent } = useRive({
+    src: '/rivefile.riv',
+    stateMachines: "State Machine 1",
+    autoplay:  true,
+  });
+
+  return (
+    <RiveComponent style={{ width: 400, height: 400 }} />
+  )
+}
+```
+
+コードとプレビューはこちらをどうぞ。
+色を変えたり、白目も少し動かしたりと少し修正をしています。
+github:
+preview:
 
 # 最後に
-OOしてきました。
-Riveの公式記事が動画しか見当たらず、私のような初心者🔰向けの記事も見当たらなかったので、操作方法を中心にまとめました。
+ここまでで、アニメーションを作成して、最終的にWebサイトへと組み込みました。
+Riveの公式記事が動画しか見当たらず、私のような初心者🔰向けの記事も見当たらなかったので、操作方法を中心にまとめてみました。
 
-GUIはとにかくどこを操作すれば良いのか分からず選択項目が多くあるRiveは全く知らない状態から始めるには大変でした、、、
+Riveを触ってみてGUIの難しさに苦労しました。GUIはとにかくどこを操作すれば良いのか分からず選択項目が多くあるRiveは知見ゼロから始めるには大変でした、、、
 
 下記参考にした資料です。その他にもRive Marketplaceにあるアニメーションも参考になるかもしれません。
 
 Rive101 公式入門　61 ~ 63
 https://www.youtube.com/playlist?list=PLujDTZWVDSsFGonP9kzAnvryowW098-p3
-
+React × Rive
+https://rive.app/docs/runtimes/react/react
 

@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "@qiita/qiita-cli": "^1.6.2"
+  },
+  "dependencies": {
+    "@rive-app/react-canvas": "^4.25.1"
   }
 }
