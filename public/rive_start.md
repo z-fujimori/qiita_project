@@ -17,9 +17,9 @@ Riveを初めて使う人がRiveを使ってアニメーションを作れるよ
 マウスを追いかけるアニメーションを作成する手順を細かめに説明します。
 最後に付録としてwebサイトに組み込む部分も載せています。
 
-↓完成イメージgif
+↓完成イメージ
 
-![moveEye1.gif](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/02dfb277-ab11-48c9-8ba6-78f54a0a6c10.gif)
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/3742368/02dfb277-ab11-48c9-8ba6-78f54a0a6c10.gif" width="650">
 
 ## Riveとは
 https://rive.app/
