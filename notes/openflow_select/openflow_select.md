@@ -359,3 +359,28 @@
 手順紹介を中心にしつつ、
 本当に伝えたいのは「SELECT方式をどう作るか」より
 「CDC方式が中心に見える中で、SELECT方式を使うなら何を引き受ける必要があるか」。
+
+# 構築手順を考える
+
+## 必要なもの
+- RDS for PostgreSQL
+- プライベートリンク
+    
+    VPC内のRDSとOpenflowを接続するために必要？
+
+    - NLB
+    - ターゲットグループ
+    - VPCエンドポイントサービス
+- IP追跡処理
+    
+    RDSのIPをターゲットグループに設定するがIPが変わった際の対応が必要？
+    
+    - RDS Proxy (SELECT方式ならこれでいける)
+    - Lambda, S3, EventBridge (CDC方式だとWALを読む必要があるためProxyが使えず、これらが必要？)
+- Openflow
+    - role
+    - database
+    - ウェアハウス
+
+
+
